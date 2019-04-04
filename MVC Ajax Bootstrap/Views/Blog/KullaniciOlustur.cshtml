@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "KullaniciOlustur";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Kullanıcı Ekleme</h2>
+<section class="row bg-transparent p-5">
+    <form id="KullaniciKayitFormu" method="post" action="/Blog/KullaniciOlustur" enctype="multipart/form-data">
+        <input type="text" name="KullaniciAdSoyad" placeholder="Ad Soyad" /><br /><br />
+        <label>Doğum Tarihi</label><br />
+        <input type="date" name="KullaniciDogumTarih" /><br /><br />
+        <input type="email" name="KullaniciEposta" placeholder="E-Posta Adresi" /><br /><br />
+        <input type="password" name="KullaniciParola" placeholder="Parola" /><br /><br />
+        @* k1Foto : name özelliğini Controller'daki parametre adı ile aynı verdik *@
+        <input type="file" name="k1Foto" /><br /><br />
+        <button type="submit" class="btn btn-success">KAYDET</button>
+    </form>
+</section>
+@section javascript
+{
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script>$(document).ready(function (event) {
+            event.preventDefault();
+            $("#KullaniciKayitFormu").submit(function () {
+                var post_url = $(this).attr("action");
+                var request_method = $(this).attr("method");
+                var formData = new FormData(this);
+                $.ajax({
+                    url: post_url,
+                    type: request_method,
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function (tamam) {
+                        if (tamam)
+                        {
+                            alert("Kayıt Başarılı");
+                            window.location.replace("/Blog/Index");
+                        }else
+                        {
+                            alert("Aajx ile Veri Gönderildi Ancak Kayıt Başarısız.");
+                        }
+                    },
+                    error: function () {
+                        alert("Ajax Veriyi Gönderemedi !!");
+                    }
+                });
+            });
+        });</script>
+}
+

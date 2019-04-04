@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogBaslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="BlogIcerik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BlogGorselUrl" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="BlogYazarID" Type="smallint" Nullable="false" />
+          <Property Name="BlogKayitTarih" Type="datetime" />
+          <Property Name="BlogGuncellemeTarih" Type="datetime" />
+          <Property Name="BlogAktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdSoyad" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="KullaniciDogumTarih" Type="date" Nullable="false" />
+          <Property Name="KullaniciEposta" Type="nvarchar" MaxLength="225" Nullable="false" />
+          <Property Name="KullaniciParola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KullaniciFotoUrl" Type="nvarchar" MaxLength="350" />
+          <Property Name="KullaniciKayitTarih" Type="date" />
+          <Property Name="KullaniciKayıtSilmeTarihi" Type="date" />
+          <Property Name="KullaniciAktif" Type="int" />
+          <Property Name="KullaniciYetki" Type="int" />
+        </EntityType>
+        <EntityType Name="Rel_Blog_Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogID" Type="smallint" Nullable="false" />
+          <Property Name="KategoriID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BlogModelStoreContainer">
+          <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rel_Blog_Kategori" EntityType="Self.Rel_Blog_Kategori" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blogs" EntityType="BlogModel.Blog" />
+          <EntitySet Name="Kategoris" EntityType="BlogModel.Kategori" />
+          <EntitySet Name="Kullanicis" EntityType="BlogModel.Kullanici" />
+          <EntitySet Name="Rel_Blog_Kategori" EntityType="BlogModel.Rel_Blog_Kategori" />
+        </EntityContainer>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogBaslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BlogIcerik" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogGorselUrl" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BlogYazarID" Type="Int16" Nullable="false" />
+          <Property Name="BlogKayitTarih" Type="DateTime" Precision="3" />
+          <Property Name="BlogGuncellemeTarih" Type="DateTime" Precision="3" />
+          <Property Name="BlogAktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdSoyad" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciDogumTarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="KullaniciEposta" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciParola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciFotoUrl" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciKayitTarih" Type="DateTime" Precision="0" />
+          <Property Name="KullaniciKayıtSilmeTarihi" Type="DateTime" Precision="0" />
+          <Property Name="KullaniciAktif" Type="Int32" DefaultValue="1" />
+          <Property Name="KullaniciYetki" Type="Int32" DefaultValue="3" />
+        </EntityType>
+        <EntityType Name="Rel_Blog_Kategori">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int16" Nullable="false" />
+          <Property Name="KategoriID" Type="Int16" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlogModelStoreContainer" CdmEntityContainer="BlogEntities">
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="BlogModel.Blog">
+              <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="BlogAktif" ColumnName="BlogAktif" />
+                <ScalarProperty Name="BlogGuncellemeTarih" ColumnName="BlogGuncellemeTarih" />
+                <ScalarProperty Name="BlogKayitTarih" ColumnName="BlogKayitTarih" />
+                <ScalarProperty Name="BlogYazarID" ColumnName="BlogYazarID" />
+                <ScalarProperty Name="BlogGorselUrl" ColumnName="BlogGorselUrl" />
+                <ScalarProperty Name="BlogIcerik" ColumnName="BlogIcerik" />
+                <ScalarProperty Name="BlogBaslik" ColumnName="BlogBaslik" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="BlogModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicis">
+            <EntityTypeMapping TypeName="BlogModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="KullaniciYetki" ColumnName="KullaniciYetki" />
+                <ScalarProperty Name="KullaniciAktif" ColumnName="KullaniciAktif" />
+                <ScalarProperty Name="KullaniciKayıtSilmeTarihi" ColumnName="KullaniciKayıtSilmeTarihi" />
+                <ScalarProperty Name="KullaniciKayitTarih" ColumnName="KullaniciKayitTarih" />
+                <ScalarProperty Name="KullaniciFotoUrl" ColumnName="KullaniciFotoUrl" />
+                <ScalarProperty Name="KullaniciParola" ColumnName="KullaniciParola" />
+                <ScalarProperty Name="KullaniciEposta" ColumnName="KullaniciEposta" />
+                <ScalarProperty Name="KullaniciDogumTarih" ColumnName="KullaniciDogumTarih" />
+                <ScalarProperty Name="KullaniciAdSoyad" ColumnName="KullaniciAdSoyad" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rel_Blog_Kategori">
+            <EntityTypeMapping TypeName="BlogModel.Rel_Blog_Kategori">
+              <MappingFragment StoreEntitySet="Rel_Blog_Kategori">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

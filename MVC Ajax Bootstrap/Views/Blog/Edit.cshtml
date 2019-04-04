@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+
+@using MVC_Ajax_Bootstrap.Models
+@model Kullanici
+<h2>Kullanıcı Düzenleme Ekranı</h2>
+<section class="row bg-light p-5">
+    <form id="DuzenlemeFormu" enctype="multipart/form-data" action="/Kullanici/Edit">
+        <input type="hidden" name="KullaniciID" value="@Model.KullaniciID" />
+        <input type="text" name="KullaniciAdSoyad" value="@Model.KullaniciAdSoyad" /><br /><br />
+        <label>Doğum Tarihi</label><br />
+        <input type="date" name="KullaniciDogumTarih" value="@Model.KullaniciDogumTarih.ToString("yyyy-MM-dd")" /><br /><br />
+        <input type="email" name="KullaniciEposta" value="@Model.KullaniciEposta" /><br /><br />
+        <input type="password" name="KullaniciParola" value="@Model.KullaniciParola" /><br /><br />
+        @* yeniFoto : name özelliğini Controller'daki parametre adı ile aynı verdik *@
+        <input type="file" name="yeniFoto" placeholder="@Model.KullaniciFotoUrl" /><br /><br />
+        <button type="submit" class="btn btn-success">KAYDET</button>
+    </form>
+</section>
+@section javascript
+{
+    <script>$("#DuzenlemeFormu").submit(function (e) {
+                e.preventDefault();
+                var formdata = new FormData(this);
+                $.ajax({
+                    url: "/Blog/Edit",
+                    type: "POST",
+                    method:"POST",
+                    data: formdata,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function (asd) {
+                        if (asd) {
+                            alert("Güncelleme İşlemi Başarılı");
+                            window.location.replace("/Blog/Index")
+                        } else {
+                            alert("Güncelleme İşlemi Başarısız.!");
+                        }
+                    },
+                    error: function () {
+                        alert("Ajax ile Veri Gönderilemedi.");
+                    }
+                })
+            });</script>
+}
+
+

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Login</h2>
+<section class="bg-dark">
+    <form id="loginform" action="/Kullanici/Login" method="post">
+        <label>Email</label>
+        <input class="form-control" name="txtEmail" type="email" />
+        <label>Parola</label>
+        <input class="form-control" name="txtParola" type="password" />
+        <br>
+        <button id="btnLogin" type="submit" class="btn btn-success form-control">GİRİŞ</button>
+        <label id="lblSonuc" text="Label">@ViewBag.SessionHata</label>
+    </form>
+</section>
+@section javascript{
+    <script>
+            $("#loginform").submit(function (event) {
+                event.preventDefault();
+                var formdata = new FormData(this);
+                $.ajax({
+                    url: "/Kullanici/Login",
+                    type: "POST",
+                    data: formdata,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (oldumu) {
+                        if (oldumu)
+                            window.location.replace("../Kullanici/Index");
+                        else
+                            alert("Kullanıcı Girişi Hatalı !!");
+                    },
+                    error: function () {
+                        alert("Ajax ile Veri Gönderilemedi.");
+                    }
+                });
+            });
+    </script>
+}

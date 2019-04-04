@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @* Bootstrap css'lerimizi buraya ekledik. *@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+
+
+
+    <main class="container bg-dark alert-warning">
+        <section class="row" style="height:150px;">
+            HEADER
+
+
+        </section>
+        <section class="row" style="height:50px;">
+            NAV MENU
+        </section>
+        <section class="row">
+            <section class="col-md-2  float-left" style="height:450px;">
+
+                <h3><a href="/Blog/KullaniciOlustur">Kullanıcı Ekle</a></h3>
+                <br />
+                <h3><a href="/Blog/Index">Kullanıcı Listele</a></h3>
+            </section>
+            @* Bu layoutu kullanan view'lerin içeriği RenderBody kısmına gelecek. *@
+            <section class="col-md-10 float-left bg-transparent">
+                @RenderBody()
+            </section>
+        </section>
+        <section class="row">
+            FOOTER
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+    @* Javascript'lerimizi buraya ekledik. *@
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @RenderSection("javascript", false)
+</body>
+</html>
